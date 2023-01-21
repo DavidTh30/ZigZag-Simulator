@@ -13,7 +13,8 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
-    Button1: TButton;
+    Button_Start: TButton;
+    Button2: TButton;
     Chart2LineSeries1: TLineSeries;
     Chart6: TChart;
     Chart6LineSeries1: TLineSeries;
@@ -24,6 +25,8 @@ type
     Image_StandardErrorOfTheMean: TImage;
     Label1: TLabel;
     Label2: TLabel;
+    Label3_Equation01: TLabel;
+    Label3_Equation02: TLabel;
     Label_Correlation_Coefficient_of_Source_1: TLabel;
     Label_AvgSource1: TLabel;
     Label_AvgSource2: TLabel;
@@ -99,25 +102,15 @@ type
     Shape7: TShape;
     Shape8: TShape;
     Source1_1: TEdit;
-    Source1_10: TEdit;
     Source1_2: TEdit;
     Source1_3: TEdit;
     Source1_4: TEdit;
     Source1_5: TEdit;
-    Source1_6: TEdit;
-    Source1_7: TEdit;
-    Source1_8: TEdit;
-    Source1_9: TEdit;
     Source2_1: TEdit;
-    Source2_10: TEdit;
     Source2_2: TEdit;
     Source2_3: TEdit;
     Source2_4: TEdit;
     Source2_5: TEdit;
-    Source2_6: TEdit;
-    Source2_7: TEdit;
-    Source2_8: TEdit;
-    Source2_9: TEdit;
     TabSheet_StandardErrorOfTheMean: TTabSheet;
     TabSheet_Correlation_Coefficient_of_Source_2: TTabSheet;
     TabSheet_Correlation_Coefficient_of_Source_1: TTabSheet;
@@ -130,7 +123,8 @@ type
     TTabSheet_Database: TTabSheet;
     TTabSheet_Chart: TTabSheet;
     Timer1: TTimer;
-    procedure Button1Click(Sender: TObject);
+    procedure Button_StartClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure Cal_StandardErrorOfTheMean();
@@ -220,7 +214,7 @@ var
   Gain_:integer;
 
 begin
-  TotalPointerX:=10;
+  TotalPointerX:=5;
 
   Randomize();
   Setlength(Base_,TotalPointerX);
@@ -277,10 +271,26 @@ begin
   StandardErrorOfTheMean2.Standard_S:=0;
   StandardErrorOfTheMean2.StandardError:=0;
 
+  if (random(2)<=0) then
+  begin    //Start pointer at heigh
+    Base_[0]:=random(25)+65;
+    Base_[1]:=random(20)+15;
+    Base_[2]:=random(35)+60;
+    Base_[3]:=random(25)+15;
+    Base_[4]:=random(25)+70;
+  end
+  else
+  begin    //Start pointer at low
+    Base_[0]:=random(20)+15;
+    Base_[1]:=random(25)+65;
+    Base_[2]:=random(20)+20;
+    Base_[3]:=random(25)+70;
+    Base_[4]:=random(25)+15;
+  end;
+
   TotalBase:=0;
   for i:=0 to TotalPointerX-1 do
   begin
-   Base_[i]:=random(50)+30;
    TotalBase:=TotalBase+Base_[i];
   end;
 
@@ -342,12 +352,18 @@ begin
   //Chart6.LeftAxis.Range.UseMin:=True;
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.Button_StartClick(Sender: TObject);
 begin
   Timer1.Enabled:= not Timer1.Enabled;
 
-  if Timer1.Enabled then Button1.Caption:='Stop';
-  if Not Timer1.Enabled then Button1.Caption:='Start';
+  if Timer1.Enabled then Button_Start.Caption:='Stop';
+  if Not Timer1.Enabled then Button_Start.Caption:='Start';
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  timer1.Enabled:=false;
+
 end;
 
 procedure TForm1.Cal_StandardErrorOfTheMean();
@@ -514,22 +530,13 @@ begin
   Source1_3.Caption:=CurrentSource1[2].ToString;
   Source1_4.Caption:=CurrentSource1[3].ToString;
   Source1_5.Caption:=CurrentSource1[4].ToString;
-  Source1_6.Caption:=CurrentSource1[5].ToString;
-  Source1_7.Caption:=CurrentSource1[6].ToString;
-  Source1_8.Caption:=CurrentSource1[7].ToString;
-  Source1_9.Caption:=CurrentSource1[8].ToString;
-  Source1_10.Caption:=CurrentSource1[9].ToString;
 
   Source2_1.Caption:=CurrentSource2[0].ToString;
   Source2_2.Caption:=CurrentSource2[1].ToString;
   Source2_3.Caption:=CurrentSource2[2].ToString;
   Source2_4.Caption:=CurrentSource2[3].ToString;
   Source2_5.Caption:=CurrentSource2[4].ToString;
-  Source2_6.Caption:=CurrentSource2[5].ToString;
-  Source2_7.Caption:=CurrentSource2[6].ToString;
-  Source2_8.Caption:=CurrentSource2[7].ToString;
-  Source2_9.Caption:=CurrentSource2[8].ToString;
-  Source2_10.Caption:=CurrentSource2[9].ToString;
+
 
   for i:=0 to TotalPointerX-1 do
   begin
