@@ -1,4 +1,4 @@
-# CorrelationSimulator
+# ZigZag-Simulator
 
 
 ![CorrelationSimulator01](https://user-images.githubusercontent.com/6564727/213513487-2036a94c-ccb5-4715-afb4-25136b518f29.png)
