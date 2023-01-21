@@ -806,6 +806,7 @@ begin
   if(timer1.Enabled=true) then
   begin
     timer1.Enabled:=false;
+    Button_Start.Caption:='Start';
     for i:=0 to 10000 do
     begin
       Application.ProcessMessages;
@@ -815,6 +816,7 @@ begin
   Cal_StandardErrorOfTheMean();
   Cal_();
   Cal_CorrelationCoefficient();
+  Cal_ZigZag();
   DisplayStatus();
 end;
 
