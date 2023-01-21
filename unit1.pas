@@ -14,7 +14,7 @@ type
 
   TForm1 = class(TForm)
     Button_Start: TButton;
-    Button2: TButton;
+    Button_New_Random: TButton;
     Chart2LineSeries1: TLineSeries;
     Chart6: TChart;
     Chart6LineSeries1: TLineSeries;
@@ -124,8 +124,9 @@ type
     TTabSheet_Chart: TTabSheet;
     Timer1: TTimer;
     procedure Button_StartClick(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure Button_New_RandomClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure CreateData01();
     procedure Timer1Timer(Sender: TObject);
     procedure Cal_StandardErrorOfTheMean();
     procedure Cal_();
@@ -206,13 +207,6 @@ implementation
 { TForm1 }
 
 procedure TForm1.FormCreate(Sender: TObject);
-var
-  i:integer;
-  TotalBase:integer;
-  //TotalTargetSource:integer;
-  //Finlish_:boolean;
-  Gain_:integer;
-
 begin
   TotalPointerX:=5;
 
@@ -222,6 +216,25 @@ begin
   Setlength(TargetSource1,TotalPointerX);
   Setlength(CurrentSource2,TotalPointerX);
   Setlength(TargetSource2,TotalPointerX);
+
+  CreateData01();
+
+  Cal_StandardErrorOfTheMean();
+  Cal_();
+  Cal_CorrelationCoefficient();
+  DisplayStatus();
+  //Chart6.LeftAxis.Range.UseMax:=True;
+  //Chart6.LeftAxis.Range.UseMin:=True;
+end;
+
+procedure TForm1.CreateData01();
+var
+  i: integer;
+  TotalBase:integer;
+  //TotalTargetSource:integer;
+  //Finlish_:boolean;
+  Gain_:integer;
+begin
   Counter_:=0;
   Serquent_:=0;
 
@@ -343,27 +356,6 @@ begin
     _Base_.Add(i,Base_[i] );
     _Source2_.Add(i,Base_[i] );
   end;
-
-  Cal_StandardErrorOfTheMean();
-  Cal_();
-  Cal_CorrelationCoefficient();
-  DisplayStatus();
-  //Chart6.LeftAxis.Range.UseMax:=True;
-  //Chart6.LeftAxis.Range.UseMin:=True;
-end;
-
-procedure TForm1.Button_StartClick(Sender: TObject);
-begin
-  Timer1.Enabled:= not Timer1.Enabled;
-
-  if Timer1.Enabled then Button_Start.Caption:='Stop';
-  if Not Timer1.Enabled then Button_Start.Caption:='Start';
-end;
-
-procedure TForm1.Button2Click(Sender: TObject);
-begin
-  timer1.Enabled:=false;
-
 end;
 
 procedure TForm1.Cal_StandardErrorOfTheMean();
@@ -595,6 +587,33 @@ begin
   Label_Source2_Avg_Xbar_Mean.Caption:='Source2_Avg_Xbar_Mean='+StandardErrorOfTheMean2.Avg_Xbar_Mean.ToString;
   Label_Source2_Standard_S.Caption:='Source2_Standard_S='+StandardErrorOfTheMean2.Standard_S.ToString;
   Label_Source2_StandardError.Caption:='Source2_StandardError='+StandardErrorOfTheMean2.StandardError.ToString;
+end;
+
+procedure TForm1.Button_StartClick(Sender: TObject);
+begin
+  Timer1.Enabled:= not Timer1.Enabled;
+
+  if Timer1.Enabled then Button_Start.Caption:='Stop';
+  if Not Timer1.Enabled then Button_Start.Caption:='Start';
+end;
+
+procedure TForm1.Button_New_RandomClick(Sender: TObject);
+var
+  i: integer;
+begin
+  if(timer1.Enabled=true) then
+  begin
+    timer1.Enabled:=false;
+    for i:=0 to 10000 do
+    begin
+      Application.ProcessMessages;
+    end;
+  end;
+  CreateData01();
+  Cal_StandardErrorOfTheMean();
+  Cal_();
+  Cal_CorrelationCoefficient();
+  DisplayStatus();
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
