@@ -41,8 +41,8 @@ object Form1: TForm1
     Height = 440
     Top = 8
     Width = 416
-    ActivePage = TTabSheet_Database
-    TabIndex = 1
+    ActivePage = TTabSheet_Chart
+    TabIndex = 0
     TabOrder = 1
     object TTabSheet_Chart: TTabSheet
       Caption = 'Chart'
@@ -259,13 +259,13 @@ object Form1: TForm1
         Caption = '=Source2'
         ParentColor = False
       end
-      object Button2: TButton
+      object Button_New_Random: TButton
         Left = 311
         Height = 32
-        Top = 369
+        Top = 368
         Width = 88
         Caption = 'New Random'
-        OnClick = Button2Click
+        OnClick = Button_New_RandomClick
         TabOrder = 10
       end
     end
