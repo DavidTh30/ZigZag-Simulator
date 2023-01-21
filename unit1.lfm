@@ -1,12 +1,12 @@
 object Form1: TForm1
-  Left = 368
-  Height = 458
-  Top = 124
+  Left = 290
+  Height = 459
+  Top = 118
   Width = 822
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'ZigZag-Simulator V0.1'
-  ClientHeight = 458
+  ClientHeight = 459
   ClientWidth = 822
   OnCreate = FormCreate
   Position = poWorkAreaCenter
@@ -272,15 +272,15 @@ object Form1: TForm1
   end
   object PageControl2: TPageControl
     Left = 432
-    Height = 392
-    Top = 56
+    Height = 400
+    Top = 48
     Width = 376
-    ActivePage = TabSheet_StandardErrorOfTheMean
-    TabIndex = 4
+    ActivePage = TabSheet_Zigzag01
+    TabIndex = 5
     TabOrder = 2
     object TabSheet_Equation01: TTabSheet
       Caption = 'Equ01'
-      ClientHeight = 364
+      ClientHeight = 372
       ClientWidth = 368
       object Label_AvgSource1: TLabel
         Left = 8
@@ -459,7 +459,7 @@ object Form1: TForm1
     end
     object TabSheet_Equation02: TTabSheet
       Caption = 'Equ02'
-      ClientHeight = 364
+      ClientHeight = 372
       ClientWidth = 368
       object Label_AvgSource3: TLabel
         Left = 8
@@ -638,7 +638,7 @@ object Form1: TForm1
     end
     object TabSheet_Correlation_Coefficient_of_Source_1: TTabSheet
       Caption = 'Source 1'
-      ClientHeight = 364
+      ClientHeight = 372
       ClientWidth = 368
       object Label_Correlation_Coefficient_of_Source_1: TLabel
         Left = 8
@@ -1694,7 +1694,7 @@ object Form1: TForm1
     end
     object TabSheet_Correlation_Coefficient_of_Source_2: TTabSheet
       Caption = 'Source 2'
-      ClientHeight = 364
+      ClientHeight = 372
       ClientWidth = 368
       object Label_Correlation_Coefficient_of_Source_2: TLabel
         Left = 8
@@ -2750,7 +2750,7 @@ object Form1: TForm1
     end
     object TabSheet_StandardErrorOfTheMean: TTabSheet
       Caption = 'StdErr'
-      ClientHeight = 364
+      ClientHeight = 372
       ClientWidth = 368
       object Label_StandardErrorOfTheMean: TLabel
         Left = 8
@@ -3259,6 +3259,366 @@ object Form1: TForm1
           86496C34EDFF01BF8D98E9EF2945360000000049454E44AE426082
         }
         Proportional = True
+      end
+    end
+    object TabSheet_Zigzag01: TTabSheet
+      Caption = 'Z 01'
+      ClientHeight = 372
+      ClientWidth = 368
+      object Label_Zigzag01: TLabel
+        Left = 8
+        Height = 15
+        Top = 8
+        Width = 47
+        Caption = 'Zigzag01'
+        ParentColor = False
+      end
+      object Label_SourceName01: TLabel
+        Left = 8
+        Height = 15
+        Top = 40
+        Width = 76
+        Caption = 'SourceName='
+        ParentColor = False
+      end
+      object Label_CompairSourceName01: TLabel
+        Left = 8
+        Height = 15
+        Top = 56
+        Width = 122
+        Caption = 'CompairSourceName='
+        ParentColor = False
+      end
+      object Label_DistanceAB01: TLabel
+        Left = 8
+        Height = 15
+        Top = 72
+        Width = 74
+        Caption = 'DistanceAB=0'
+        ParentColor = False
+      end
+      object Label_DistanceBC01: TLabel
+        Left = 8
+        Height = 15
+        Top = 88
+        Width = 74
+        Caption = 'DistanceBC=0'
+        ParentColor = False
+      end
+      object Label_DistanceCD01: TLabel
+        Left = 8
+        Height = 15
+        Top = 104
+        Width = 75
+        Caption = 'DistanceCD=0'
+        ParentColor = False
+      end
+      object Label_DistanceDE01: TLabel
+        Left = 8
+        Height = 15
+        Top = 120
+        Width = 73
+        Caption = 'DistanceDE=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceErrorPercentAB01: TLabel
+        Left = 8
+        Height = 15
+        Top = 136
+        Width = 100
+        Caption = 'CompairErrorAB=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceErrorPercentBC01: TLabel
+        Left = 8
+        Height = 15
+        Top = 152
+        Width = 100
+        Caption = 'CompairErrorBC=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceErrorPercentCD01: TLabel
+        Left = 8
+        Height = 15
+        Top = 168
+        Width = 101
+        Caption = 'CompairErrorCD=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceErrorPercentDE01: TLabel
+        Left = 8
+        Height = 15
+        Top = 184
+        Width = 99
+        Caption = 'CompairErrorDE=0'
+        ParentColor = False
+      end
+      object Label_DistanceAC01: TLabel
+        Left = 8
+        Height = 15
+        Top = 200
+        Width = 75
+        Caption = 'DistanceAC=0'
+        ParentColor = False
+      end
+      object Label_DistanceCE01: TLabel
+        Left = 8
+        Height = 15
+        Top = 216
+        Width = 73
+        Caption = 'DistanceCE=0'
+        ParentColor = False
+      end
+      object Label_DistanceBD01: TLabel
+        Left = 8
+        Height = 15
+        Top = 232
+        Width = 74
+        Caption = 'DistanceBD=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceDistanceA01: TLabel
+        Left = 8
+        Height = 15
+        Top = 248
+        Width = 113
+        Caption = 'CompairDistanceA=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceDistanceB01: TLabel
+        Left = 8
+        Height = 15
+        Top = 264
+        Width = 112
+        Caption = 'CompairDistanceB=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceDistanceC01: TLabel
+        Left = 8
+        Height = 15
+        Top = 280
+        Width = 113
+        Caption = 'CompairDistanceC=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceDistanceD01: TLabel
+        Left = 8
+        Height = 15
+        Top = 296
+        Width = 113
+        Caption = 'CompairDistanceD=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceDistanceE01: TLabel
+        Left = 8
+        Height = 15
+        Top = 312
+        Width = 111
+        Caption = 'CompairDistanceE=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceErrorPercentE01: TLabel
+        Left = 8
+        Height = 15
+        Top = 328
+        Width = 91
+        Caption = 'CompairErrorE=0'
+        ParentColor = False
+      end
+      object Shape9: TShape
+        Left = 296
+        Height = 13
+        Top = 10
+        Width = 16
+        Brush.Color = clLime
+      end
+      object Label_Source9: TLabel
+        Left = 314
+        Height = 15
+        Top = 8
+        Width = 50
+        Caption = '=Source1'
+        ParentColor = False
+      end
+    end
+    object TabSheet1_Zigzag02: TTabSheet
+      Caption = 'Z 02'
+      ClientHeight = 372
+      ClientWidth = 368
+      object Label_Zigzag02: TLabel
+        Left = 8
+        Height = 15
+        Top = 8
+        Width = 47
+        Caption = 'Zigzag02'
+        ParentColor = False
+      end
+      object Label_SourceName02: TLabel
+        Left = 8
+        Height = 15
+        Top = 40
+        Width = 76
+        Caption = 'SourceName='
+        ParentColor = False
+      end
+      object Label_CompairSourceName02: TLabel
+        Left = 8
+        Height = 15
+        Top = 56
+        Width = 122
+        Caption = 'CompairSourceName='
+        ParentColor = False
+      end
+      object Label_DistanceAB02: TLabel
+        Left = 8
+        Height = 15
+        Top = 72
+        Width = 74
+        Caption = 'DistanceAB=0'
+        ParentColor = False
+      end
+      object Label_DistanceBC02: TLabel
+        Left = 8
+        Height = 15
+        Top = 88
+        Width = 74
+        Caption = 'DistanceBC=0'
+        ParentColor = False
+      end
+      object Label_DistanceCD02: TLabel
+        Left = 8
+        Height = 15
+        Top = 104
+        Width = 75
+        Caption = 'DistanceCD=0'
+        ParentColor = False
+      end
+      object Label_DistanceDE02: TLabel
+        Left = 8
+        Height = 15
+        Top = 120
+        Width = 73
+        Caption = 'DistanceDE=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceErrorPercentAB02: TLabel
+        Left = 8
+        Height = 15
+        Top = 136
+        Width = 100
+        Caption = 'CompairErrorAB=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceErrorPercentBC02: TLabel
+        Left = 8
+        Height = 15
+        Top = 152
+        Width = 100
+        Caption = 'CompairErrorBC=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceErrorPercentCD02: TLabel
+        Left = 8
+        Height = 15
+        Top = 168
+        Width = 101
+        Caption = 'CompairErrorCD=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceErrorPercentDE02: TLabel
+        Left = 8
+        Height = 15
+        Top = 184
+        Width = 99
+        Caption = 'CompairErrorDE=0'
+        ParentColor = False
+      end
+      object Label_DistanceAC02: TLabel
+        Left = 8
+        Height = 15
+        Top = 200
+        Width = 75
+        Caption = 'DistanceAC=0'
+        ParentColor = False
+      end
+      object Label_DistanceCE02: TLabel
+        Left = 8
+        Height = 15
+        Top = 216
+        Width = 73
+        Caption = 'DistanceCE=0'
+        ParentColor = False
+      end
+      object Label_DistanceBD02: TLabel
+        Left = 8
+        Height = 15
+        Top = 232
+        Width = 74
+        Caption = 'DistanceBD=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceDistanceA02: TLabel
+        Left = 8
+        Height = 15
+        Top = 248
+        Width = 113
+        Caption = 'CompairDistanceA=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceDistanceB02: TLabel
+        Left = 8
+        Height = 15
+        Top = 264
+        Width = 112
+        Caption = 'CompairDistanceB=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceDistanceC02: TLabel
+        Left = 8
+        Height = 15
+        Top = 280
+        Width = 113
+        Caption = 'CompairDistanceC=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceDistanceD02: TLabel
+        Left = 8
+        Height = 15
+        Top = 296
+        Width = 113
+        Caption = 'CompairDistanceD=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceDistanceE02: TLabel
+        Left = 8
+        Height = 15
+        Top = 312
+        Width = 111
+        Caption = 'CompairDistanceE=0'
+        ParentColor = False
+      end
+      object Label_CompairSourceErrorPercentE02: TLabel
+        Left = 8
+        Height = 15
+        Top = 328
+        Width = 91
+        Caption = 'CompairErrorE=0'
+        ParentColor = False
+      end
+      object Shape10: TShape
+        Left = 296
+        Height = 13
+        Top = 10
+        Width = 16
+        Brush.Color = clRed
+      end
+      object Label_Source10: TLabel
+        Left = 314
+        Height = 15
+        Top = 8
+        Width = 50
+        Caption = '=Source2'
+        ParentColor = False
       end
     end
   end
