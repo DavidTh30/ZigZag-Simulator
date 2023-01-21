@@ -27,6 +27,17 @@ type
     Label2: TLabel;
     Label3_Equation01: TLabel;
     Label3_Equation02: TLabel;
+    Label_CompairSourceDistanceA02: TLabel;
+    Label_CompairSourceDistanceB02: TLabel;
+    Label_CompairSourceDistanceC02: TLabel;
+    Label_CompairSourceDistanceD02: TLabel;
+    Label_CompairSourceDistanceE02: TLabel;
+    Label_CompairSourceErrorPercentAB02: TLabel;
+    Label_CompairSourceErrorPercentBC02: TLabel;
+    Label_CompairSourceErrorPercentCD02: TLabel;
+    Label_CompairSourceErrorPercentDE02: TLabel;
+    Label_CompairSourceErrorPercentE02: TLabel;
+    Label_CompairSourceName02: TLabel;
     Label_Correlation_Coefficient_of_Source_1: TLabel;
     Label_AvgSource1: TLabel;
     Label_AvgSource2: TLabel;
@@ -37,12 +48,22 @@ type
     Label_CloseOrderPriceSource3: TLabel;
     Label_CloseOrderPriceSource4: TLabel;
     Label_Correlation_Coefficient_of_Source_2: TLabel;
+    Label_DistanceAB02: TLabel;
+    Label_DistanceAC02: TLabel;
+    Label_DistanceBC02: TLabel;
+    Label_DistanceBD02: TLabel;
+    Label_DistanceCD02: TLabel;
+    Label_DistanceCE02: TLabel;
+    Label_DistanceDE02: TLabel;
+    Label_Source10: TLabel;
     Label_Source1_Avg_Xbar_Mean: TLabel;
     Label_Source1_Standard_S: TLabel;
     Label_Source1_StandardError: TLabel;
     Label_Source2_Avg_Xbar_Mean: TLabel;
     Label_Source2_Standard_S: TLabel;
     Label_Source2_StandardError: TLabel;
+    Label_Source9: TLabel;
+    Label_SourceName02: TLabel;
     Label_StandardErrorOfTheMean: TLabel;
     Label_Source2_r: TLabel;
     Label_Source1_Summation_X: TLabel;
@@ -88,12 +109,34 @@ type
     Label_Source8: TLabel;
     Label_Sqrt_I1_S1: TLabel;
     Label_Sqrt_I1_S2: TLabel;
+    Label_Zigzag01: TLabel;
+    Label_CompairSourceErrorPercentCD01: TLabel;
+    Label_CompairSourceErrorPercentDE01: TLabel;
+    Label_DistanceAC01: TLabel;
+    Label_DistanceCE01: TLabel;
+    Label_DistanceBD01: TLabel;
+    Label_CompairSourceDistanceA01: TLabel;
+    Label_CompairSourceDistanceB01: TLabel;
+    Label_CompairSourceDistanceC01: TLabel;
+    Label_CompairSourceDistanceD01: TLabel;
+    Label_CompairSourceDistanceE01: TLabel;
+    Label_SourceName01: TLabel;
+    Label_CompairSourceErrorPercentE01: TLabel;
+    Label_CompairSourceName01: TLabel;
+    Label_DistanceAB01: TLabel;
+    Label_DistanceBC01: TLabel;
+    Label_DistanceCD01: TLabel;
+    Label_DistanceDE01: TLabel;
+    Label_CompairSourceErrorPercentAB01: TLabel;
+    Label_CompairSourceErrorPercentBC01: TLabel;
     Label_U: TLabel;
     Label_U1: TLabel;
     Label_U_: TLabel;
     Label_U_1: TLabel;
+    Label_Zigzag02: TLabel;
     PageControl2: TPageControl;
     Shape1: TShape;
+    Shape10: TShape;
     Shape2: TShape;
     Shape3: TShape;
     Shape4: TShape;
@@ -101,6 +144,7 @@ type
     Shape6: TShape;
     Shape7: TShape;
     Shape8: TShape;
+    Shape9: TShape;
     Source1_1: TEdit;
     Source1_2: TEdit;
     Source1_3: TEdit;
@@ -111,6 +155,8 @@ type
     Source2_3: TEdit;
     Source2_4: TEdit;
     Source2_5: TEdit;
+    TabSheet1_Zigzag02: TTabSheet;
+    TabSheet_Zigzag01: TTabSheet;
     TabSheet_StandardErrorOfTheMean: TTabSheet;
     TabSheet_Correlation_Coefficient_of_Source_2: TTabSheet;
     TabSheet_Correlation_Coefficient_of_Source_1: TTabSheet;
@@ -131,6 +177,7 @@ type
     procedure Cal_StandardErrorOfTheMean();
     procedure Cal_();
     procedure Cal_CorrelationCoefficient();
+    procedure Cal_ZigZag();
     procedure DisplayStatus();
     procedure Source1_Up_To_TargetSource1(Loop_: integer);
     procedure Source1_Down_To_Base(Loop_: integer);
@@ -181,6 +228,29 @@ type
     StandardError:double;
   end;
 
+  Type
+  Zigzag_data = Record
+    SourceName:string;
+    CompairSourceName:string;
+    DistanceAB:double;
+    DistanceBC:double;
+    DistanceCD:double;
+    DistanceDE:double;
+    CompairSourceErrorPercentAB:double;
+    CompairSourceErrorPercentBC:double;
+    CompairSourceErrorPercentCD:double;
+    CompairSourceErrorPercentDE:double;
+    DistanceAC:double;
+    DistanceCE:double;
+    DistanceBD:double;
+    CompairSourceDistanceA:double;
+    CompairSourceDistanceB:double;
+    CompairSourceDistanceC:double;
+    CompairSourceDistanceD:double;
+    CompairSourceDistanceE:double;
+    CompairSourceErrorPercentE:double;
+  end;
+
 var
   Form1: TForm1;
   Base_: array of integer;
@@ -199,6 +269,9 @@ var
 
   StandardErrorOfTheMean1:StandardErrorOfTheMean;
   StandardErrorOfTheMean2:StandardErrorOfTheMean;
+
+  Zigzag_data1:Zigzag_data;
+  Zigzag_data2:Zigzag_data;
 
 implementation
 
@@ -222,6 +295,7 @@ begin
   Cal_StandardErrorOfTheMean();
   Cal_();
   Cal_CorrelationCoefficient();
+  Cal_ZigZag();
   DisplayStatus();
   //Chart6.LeftAxis.Range.UseMax:=True;
   //Chart6.LeftAxis.Range.UseMin:=True;
@@ -283,6 +357,49 @@ begin
   StandardErrorOfTheMean2.Avg_Xbar_Mean:=0;
   StandardErrorOfTheMean2.Standard_S:=0;
   StandardErrorOfTheMean2.StandardError:=0;
+
+  Zigzag_data1.SourceName:='Zigzag_data1';
+  Zigzag_data1.CompairSourceName:='';
+  Zigzag_data1.DistanceAB:=0;
+  Zigzag_data1.DistanceBC:=0;
+  Zigzag_data1.DistanceCD:=0;
+  Zigzag_data1.DistanceDE:=0;
+  Zigzag_data1.CompairSourceErrorPercentAB:=0;
+  Zigzag_data1.CompairSourceErrorPercentBC:=0;
+  Zigzag_data1.CompairSourceErrorPercentCD:=0;
+  Zigzag_data1.CompairSourceErrorPercentDE:=0;
+  Zigzag_data1.DistanceAC:=0;
+  Zigzag_data1.DistanceCE:=0;
+  Zigzag_data1.DistanceBD:=0;
+  Zigzag_data1.CompairSourceDistanceA:=0;
+  Zigzag_data1.CompairSourceDistanceB:=0;
+  Zigzag_data1.CompairSourceDistanceC:=0;
+  Zigzag_data1.CompairSourceDistanceD:=0;
+  Zigzag_data1.CompairSourceDistanceE:=0;
+  Zigzag_data1.CompairSourceErrorPercentE:=0;
+
+  Zigzag_data2.SourceName:='Zigzag_data2';
+  Zigzag_data2.CompairSourceName:='';
+  Zigzag_data2.DistanceAB:=0;
+  Zigzag_data2.DistanceBC:=0;
+  Zigzag_data2.DistanceCD:=0;
+  Zigzag_data2.DistanceDE:=0;
+  Zigzag_data2.CompairSourceErrorPercentAB:=0;
+  Zigzag_data2.CompairSourceErrorPercentBC:=0;
+  Zigzag_data2.CompairSourceErrorPercentCD:=0;
+  Zigzag_data2.CompairSourceErrorPercentDE:=0;
+  Zigzag_data2.DistanceAC:=0;
+  Zigzag_data2.DistanceCE:=0;
+  Zigzag_data2.DistanceBD:=0;
+  Zigzag_data2.CompairSourceDistanceA:=0;
+  Zigzag_data2.CompairSourceDistanceB:=0;
+  Zigzag_data2.CompairSourceDistanceC:=0;
+  Zigzag_data2.CompairSourceDistanceD:=0;
+  Zigzag_data2.CompairSourceDistanceE:=0;
+  Zigzag_data2.CompairSourceErrorPercentE:=0;
+
+  Zigzag_data1.CompairSourceName:=Zigzag_data2.SourceName;
+  Zigzag_data2.CompairSourceName:=Zigzag_data1.SourceName;
 
   if (random(2)<=0) then
   begin    //Start pointer at heigh
@@ -356,6 +473,49 @@ begin
     _Base_.Add(i,Base_[i] );
     _Source2_.Add(i,Base_[i] );
   end;
+end;
+
+procedure TForm1.Cal_ZigZag();
+begin
+  Zigzag_data1.DistanceAB:=CurrentSource1[0]-CurrentSource1[1];
+  Zigzag_data1.DistanceBC:=CurrentSource1[1]-CurrentSource1[2];
+  Zigzag_data1.DistanceCD:=CurrentSource1[2]-CurrentSource1[3];
+  Zigzag_data1.DistanceDE:=CurrentSource1[3]-CurrentSource1[4];
+  Zigzag_data1.DistanceAC:=Sqrt(math.Power(0-2,2)+math.Power(CurrentSource1[0]-CurrentSource1[2],2));
+  Zigzag_data1.DistanceCE:=Sqrt(math.Power(2-4,2)+math.Power(CurrentSource1[2]-CurrentSource1[4],2));
+  Zigzag_data1.DistanceBD:=Sqrt(math.Power(1-3,2)+math.Power(CurrentSource1[1]-CurrentSource1[3],2));
+
+  Zigzag_data2.DistanceAB:=CurrentSource2[0]-CurrentSource2[1];
+  Zigzag_data2.DistanceBC:=CurrentSource2[1]-CurrentSource2[2];
+  Zigzag_data2.DistanceCD:=CurrentSource2[2]-CurrentSource2[3];
+  Zigzag_data2.DistanceDE:=CurrentSource2[3]-CurrentSource2[4];
+  Zigzag_data2.DistanceAC:=Sqrt(math.Power(0-2,2)+math.Power(CurrentSource2[0]-CurrentSource2[2],2));
+  Zigzag_data2.DistanceCE:=Sqrt(math.Power(2-4,2)+math.Power(CurrentSource2[2]-CurrentSource2[4],2));
+  Zigzag_data2.DistanceBD:=Sqrt(math.Power(1-3,2)+math.Power(CurrentSource2[1]-CurrentSource2[3],2));
+
+  Zigzag_data1.CompairSourceErrorPercentAB:=100-((Zigzag_data1.DistanceAB/Zigzag_data2.DistanceAB)*100);
+  Zigzag_data1.CompairSourceErrorPercentBC:=100-((Zigzag_data1.DistanceBC/Zigzag_data2.DistanceBC)*100);
+  Zigzag_data1.CompairSourceErrorPercentCD:=100-((Zigzag_data1.DistanceCD/Zigzag_data2.DistanceCD)*100);
+  Zigzag_data1.CompairSourceErrorPercentDE:=100-((Zigzag_data1.DistanceDE/Zigzag_data2.DistanceDE)*100);
+
+  Zigzag_data2.CompairSourceErrorPercentAB:=100-((Zigzag_data2.DistanceAB/Zigzag_data1.DistanceAB)*100);
+  Zigzag_data2.CompairSourceErrorPercentBC:=100-((Zigzag_data2.DistanceBC/Zigzag_data1.DistanceBC)*100);
+  Zigzag_data2.CompairSourceErrorPercentCD:=100-((Zigzag_data2.DistanceCD/Zigzag_data1.DistanceCD)*100);
+  Zigzag_data2.CompairSourceErrorPercentDE:=100-((Zigzag_data2.DistanceDE/Zigzag_data1.DistanceDE)*100);
+
+  Zigzag_data1.CompairSourceDistanceA:=(CurrentSource1[0]-CurrentSource2[0]);
+  Zigzag_data1.CompairSourceDistanceB:=(CurrentSource1[1]-CurrentSource2[1]);
+  Zigzag_data1.CompairSourceDistanceC:=(CurrentSource1[2]-CurrentSource2[2]);
+  Zigzag_data1.CompairSourceDistanceD:=(CurrentSource1[3]-CurrentSource2[3]);
+  Zigzag_data1.CompairSourceDistanceE:=(CurrentSource1[4]-CurrentSource2[4]);
+  Zigzag_data1.CompairSourceErrorPercentE:=100-((CurrentSource1[4]/CurrentSource2[4])*100);
+
+  Zigzag_data2.CompairSourceDistanceA:=(CurrentSource2[0]-CurrentSource1[0]);
+  Zigzag_data2.CompairSourceDistanceB:=(CurrentSource2[1]-CurrentSource1[1]);
+  Zigzag_data2.CompairSourceDistanceC:=(CurrentSource2[2]-CurrentSource1[2]);
+  Zigzag_data2.CompairSourceDistanceD:=(CurrentSource2[3]-CurrentSource1[3]);
+  Zigzag_data2.CompairSourceDistanceE:=(CurrentSource2[4]-CurrentSource1[4]);
+  Zigzag_data2.CompairSourceErrorPercentE:=100-((CurrentSource2[4]/CurrentSource1[4])*100);
 end;
 
 procedure TForm1.Cal_StandardErrorOfTheMean();
@@ -587,6 +747,48 @@ begin
   Label_Source2_Avg_Xbar_Mean.Caption:='Source2_Avg_Xbar_Mean='+StandardErrorOfTheMean2.Avg_Xbar_Mean.ToString;
   Label_Source2_Standard_S.Caption:='Source2_Standard_S='+StandardErrorOfTheMean2.Standard_S.ToString;
   Label_Source2_StandardError.Caption:='Source2_StandardError='+StandardErrorOfTheMean2.StandardError.ToString;
+
+  Label_SourceName01.Caption:='SourceName='+Zigzag_data1.SourceName;
+  Label_CompairSourceName01.Caption:='CompairSourceName='+Zigzag_data1.CompairSourceName;
+  Label_DistanceAB01.Caption:='DistanceAB='+Zigzag_data1.DistanceAB.ToString;
+  Label_DistanceBC01.Caption:='DistanceBC='+Zigzag_data1.DistanceBC.ToString;
+  Label_DistanceCD01.Caption:='DistanceCD='+Zigzag_data1.DistanceCD.ToString;
+  Label_DistanceDE01.Caption:='DistanceDE='+Zigzag_data1.DistanceDE.ToString;
+  Label_CompairSourceErrorPercentAB01.Caption:='CompairErrorAB='+Zigzag_data1.CompairSourceErrorPercentAB.ToString+'%';
+  Label_CompairSourceErrorPercentBC01.Caption:='CompairErrorBC='+Zigzag_data1.CompairSourceErrorPercentBC.ToString+'%';
+  Label_CompairSourceErrorPercentCD01.Caption:='CompairErrorCD='+Zigzag_data1.CompairSourceErrorPercentCD.ToString+'%';
+  Label_CompairSourceErrorPercentDE01.Caption:='CompairErrorDE='+Zigzag_data1.CompairSourceErrorPercentDE.ToString+'%';
+  Label_DistanceAC01.Caption:='DistanceAC='+Zigzag_data1.DistanceAC.ToString;
+  Label_DistanceCE01.Caption:='DistanceCE='+Zigzag_data1.DistanceCE.ToString;
+  Label_DistanceBD01.Caption:='DistanceBD='+Zigzag_data1.DistanceBD.ToString;
+  Label_CompairSourceDistanceA01.Caption:='CompairDistanceA='+Zigzag_data1.CompairSourceDistanceA.ToString;
+  Label_CompairSourceDistanceB01.Caption:='CompairDistanceB='+Zigzag_data1.CompairSourceDistanceB.ToString;
+  Label_CompairSourceDistanceC01.Caption:='CompairDistanceC='+Zigzag_data1.CompairSourceDistanceC.ToString;
+  Label_CompairSourceDistanceD01.Caption:='CompairDistanceD='+Zigzag_data1.CompairSourceDistanceD.ToString;
+  Label_CompairSourceDistanceE01.Caption:='CompairDistanceE='+Zigzag_data1.CompairSourceDistanceE.ToString;
+  Label_CompairSourceErrorPercentE01.Caption:='CompairErrorE='+Zigzag_data1.CompairSourceErrorPercentE.ToString+'%';
+
+  Label_SourceName02.Caption:='SourceName='+Zigzag_data2.SourceName;
+  Label_CompairSourceName02.Caption:='CompairSourceName='+Zigzag_data2.CompairSourceName;
+  Label_DistanceAB02.Caption:='DistanceAB='+Zigzag_data2.DistanceAB.ToString;
+  Label_DistanceBC02.Caption:='DistanceBC='+Zigzag_data2.DistanceBC.ToString;
+  Label_DistanceCD02.Caption:='DistanceCD='+Zigzag_data2.DistanceCD.ToString;
+  Label_DistanceDE02.Caption:='DistanceDE='+Zigzag_data2.DistanceDE.ToString;
+  Label_CompairSourceErrorPercentAB02.Caption:='CompairErrorAB='+Zigzag_data2.CompairSourceErrorPercentAB.ToString+'%';
+  Label_CompairSourceErrorPercentBC02.Caption:='CompairErrorBC='+Zigzag_data2.CompairSourceErrorPercentBC.ToString+'%';
+  Label_CompairSourceErrorPercentCD02.Caption:='CompairErrorCD='+Zigzag_data2.CompairSourceErrorPercentCD.ToString+'%';
+  Label_CompairSourceErrorPercentDE02.Caption:='CompairErrorDE='+Zigzag_data2.CompairSourceErrorPercentDE.ToString+'%';
+  Label_DistanceAC02.Caption:='DistanceAC='+Zigzag_data2.DistanceAC.ToString;
+  Label_DistanceCE02.Caption:='DistanceCE='+Zigzag_data2.DistanceCE.ToString;
+  Label_DistanceBD02.Caption:='DistanceBD='+Zigzag_data2.DistanceBD.ToString;
+  Label_CompairSourceDistanceA02.Caption:='CompairDistanceA='+Zigzag_data2.CompairSourceDistanceA.ToString;
+  Label_CompairSourceDistanceB02.Caption:='CompairDistanceB='+Zigzag_data2.CompairSourceDistanceB.ToString;
+  Label_CompairSourceDistanceC02.Caption:='CompairDistanceC='+Zigzag_data2.CompairSourceDistanceC.ToString;
+  Label_CompairSourceDistanceD02.Caption:='CompairDistanceD='+Zigzag_data2.CompairSourceDistanceD.ToString;
+  Label_CompairSourceDistanceE02.Caption:='CompairDistanceE='+Zigzag_data2.CompairSourceDistanceE.ToString;
+  Label_CompairSourceErrorPercentE02.Caption:='CompairErrorE='+Zigzag_data2.CompairSourceErrorPercentE.ToString+'%';
+
+
 end;
 
 procedure TForm1.Button_StartClick(Sender: TObject);
@@ -774,6 +976,7 @@ begin
   Cal_StandardErrorOfTheMean();
   Cal_();
   Cal_CorrelationCoefficient();
+  Cal_ZigZag();
   DisplayStatus();
 end;
 
